@@ -1,10 +1,22 @@
 package service;
 
+import dao.ContactDAO;
 import entities.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ContactServiceImpl implements ContactService{
+
+    private ContactDAO contactDAO;
+
+    @Autowired
+    public ContactServiceImpl(ContactDAO contactDAO) {
+        this.contactDAO = contactDAO;
+    }
+
     @Override
     public void createСontact() {
 
@@ -17,8 +29,9 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public List<Contact> getContactsList() {
-        return null;
+        return contactDAO.getAllContacts();
     }
+
 
     @Override
     public void updateContactById() {

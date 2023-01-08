@@ -1,4 +1,9 @@
 package dao;
 
-public class PhoneNumberDAOImpl {
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+@Transactional
+public class PhoneNumberDAOImpl implements PhoneNumberDAO{
 }
