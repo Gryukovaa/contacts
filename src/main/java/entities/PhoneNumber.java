@@ -1,10 +1,13 @@
 package entities;
 
-import jakarta.persistence.*;
+
+import org.hibernate.annotations.Table;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "contact_phones")
+@Table(appliesTo = "contact_phones")
 public class PhoneNumber {
 
     @Id

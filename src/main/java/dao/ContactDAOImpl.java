@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class ContactDAOImpl implements ContactDAO{
 
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Autowired
     public ContactDAOImpl(SessionFactory sessionFactory) {

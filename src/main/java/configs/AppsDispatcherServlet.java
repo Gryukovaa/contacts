@@ -7,12 +7,12 @@ public class AppsDispatcherServlet extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class<?>[]{ApplicationContextAndWebInitializer.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{ApplicationContextAndWebInitializer.class};
+        return new Class<?>[]{ApplicationContextAndWebInitializer.class};
     }
 
     @Override
@@ -20,11 +20,9 @@ public class AppsDispatcherServlet extends AbstractAnnotationConfigDispatcherSer
         return new String[]{"/"};
     }
 
-   /* @Override
+    /*@Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        registerCharacterEncodingFilter(aServletContext);
-        registerHiddenFieldFilter(aServletContext);
     }*/
 
     /*private void registerHiddenFieldFilter(ServletContext aContext) {
