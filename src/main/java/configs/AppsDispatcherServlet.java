@@ -12,7 +12,7 @@ public class AppsDispatcherServlet extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{ApplicationContextAndWebInitializer.class};
+        return new Class[]{ApplicationContextAndWebInitializer.class};
     }
 
     @Override

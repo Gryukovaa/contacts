@@ -20,12 +20,13 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("java")
-@PropertySource("db.properties")
+@ComponentScan(value ="java")
+@PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @EnableWebMvc
 public class ApplicationContextAndWebInitializer implements WebMvcConfigurer {
@@ -43,7 +44,7 @@ public class ApplicationContextAndWebInitializer implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setPrefix("/WEB-INF/views/contacts/");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
