@@ -1,13 +1,13 @@
-package entities;
+/*
+package web.entities;
 
 
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(appliesTo = "contact_phones")
+@Table(name = "contact_phones")
 public class PhoneNumber {
 
     @Id
@@ -19,8 +19,7 @@ public class PhoneNumber {
     private long phoneNumber;
 
     @Column(name = "label")
-    @Enumerated(EnumType.STRING)
-    private Label label;
+    private String label;
 
     @ManyToOne
     @JoinColumn(name = "contact_id")
@@ -29,8 +28,15 @@ public class PhoneNumber {
     public PhoneNumber() {
     }
 
-    public PhoneNumber(long phone_number, Label label, Contact contact) {
+    public PhoneNumber(long phone_number, String label, Contact contact) {
         this.phoneNumber = phone_number;
+        this.label = label;
+        this.contact = contact;
+    }
+
+    public PhoneNumber(int id, long phoneNumber, String label, Contact contact) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
         this.label = label;
         this.contact = contact;
     }
@@ -51,11 +57,11 @@ public class PhoneNumber {
         this.phoneNumber = phone_number;
     }
 
-    public Label getLabel() {
+    public String getLabel() {
         return label;
     }
 
-    public void setLabel(Label label) {
+    public void setLabel(String label) {
         this.label = label;
     }
 
@@ -89,3 +95,4 @@ public class PhoneNumber {
                 '}';
     }
 }
+*/

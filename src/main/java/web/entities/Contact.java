@@ -1,14 +1,10 @@
-package entities;
-
-import org.hibernate.annotations.Table;
-
+package web.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(appliesTo = "contacts")
+@Table(name="contacts")
 public class Contact {
 
     @Id
@@ -22,16 +18,16 @@ public class Contact {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "contact")
-    private List<PhoneNumber> numbers;
+    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<PhoneNumber> numbers;*/
 
     public Contact() {
     }
 
-    public Contact(String firstName, String lastName, List<PhoneNumber> numbers) {
+    public Contact(int contact_id, String firstName, String lastName) {
+        this.contact_id = contact_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.numbers = numbers;
     }
 
     public int getContact_id() {
@@ -58,25 +54,19 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    public List<PhoneNumber> getNumbers() {
-        return numbers;
-    }
 
-    public void setNumbers(List<PhoneNumber> numbers) {
-        this.numbers = numbers;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName) && Objects.equals(numbers, contact.numbers);
+        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, numbers);
+        return Objects.hash(firstName, lastName);
     }
 
     @Override
@@ -84,7 +74,6 @@ public class Contact {
         return "Contact{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", numbers=" + numbers +
                 '}';
     }
 }

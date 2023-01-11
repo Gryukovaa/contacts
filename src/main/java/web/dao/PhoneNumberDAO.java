@@ -1,4 +1,5 @@
-package dao;
+package web.dao;
 
 public interface PhoneNumberDAO {
+
 }

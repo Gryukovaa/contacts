@@ -1,16 +1,16 @@
-package controllers;
+package web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.ContactService;
+import web.service.ContactService;
 
 
 @Controller
-@RequestMapping("/contacts")
+@RequestMapping("/")
 public class ContactController {
 
     private final ContactService contactService;
@@ -22,11 +22,13 @@ public class ContactController {
 
 
 
-    @GetMapping("")
+    @RequestMapping("")
     public String getAllContacts(Model model){
         System.out.println("ulalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        System.out.println(contactService.getContactsList());
         model.addAttribute("allContacts", contactService.getContactsList());
-        return "welcome";
+        System.out.println(contactService.getContactsList());
+        return "contacts/welcome";
     }
 
 }

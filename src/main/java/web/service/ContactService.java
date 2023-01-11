@@ -1,11 +1,10 @@
-package service;
+package web.service;
 
-import entities.Contact;
-import org.springframework.stereotype.Component;
+import web.entities.Contact;
 
 import java.util.List;
 
-@Component
+
 public interface ContactService {
 
     void createСontact();

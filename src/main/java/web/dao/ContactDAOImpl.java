@@ -1,6 +1,7 @@
-package dao;
+package web.dao;
 
-import entities.Contact;
+import org.springframework.transaction.annotation.Transactional;
+import web.entities.Contact;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@Transactional
 public class ContactDAOImpl implements ContactDAO{
 
     private SessionFactory sessionFactory;
@@ -21,7 +23,9 @@ public class ContactDAOImpl implements ContactDAO{
     @Override
     public List<Contact> getAllContacts() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select c from Contact c", Contact.class).getResultList();
+        return session.createQuery("from Contact", Contact.class).getResultList();
     }
+
+
 
 }

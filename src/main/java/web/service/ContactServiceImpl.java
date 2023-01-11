@@ -1,7 +1,7 @@
-package service;
+package web.service;
 
-import dao.ContactDAO;
-import entities.Contact;
+import web.dao.ContactDAO;
+import web.entities.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package configs;
+package web.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -19,13 +19,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import web.entities.Contact;
 
 
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(value ="java")
+@ComponentScan("web")
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @EnableWebMvc
@@ -44,7 +46,7 @@ public class ApplicationContextAndWebInitializer implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/contacts/");
+        templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
@@ -68,18 +70,17 @@ public class ApplicationContextAndWebInitializer implements WebMvcConfigurer {
     }
 
 
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-@Bean
-public DataSource dataSource() {
-    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
+        dataSource.setUrl(env.getRequiredProperty("db.url"));
+        dataSource.setUsername(env.getRequiredProperty("db.username"));
+        dataSource.setPassword(env.getRequiredProperty("db.password"));
 
-    dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
-    dataSource.setUrl(env.getRequiredProperty("db.url"));
-    dataSource.setUsername(env.getRequiredProperty("db.username"));
-    dataSource.setPassword(env.getRequiredProperty("db.password"));
-
-    return dataSource;
-}
+        return dataSource;
+    }
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
@@ -89,11 +90,12 @@ public DataSource dataSource() {
         return properties;
     }
 
+
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("java.entities");
+        sessionFactory.setPackagesToScan("web.entities");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
