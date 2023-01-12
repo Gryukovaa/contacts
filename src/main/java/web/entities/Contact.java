@@ -1,6 +1,8 @@
 package web.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,8 +20,8 @@ public class Contact {
     @Column(name = "last_name")
     private String lastName;
 
-    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = CascadeType.ALL)
-    private List<PhoneNumber> numbers;*/
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+    private List<PhoneNumber> phoneNumbers;
 
     public Contact() {
     }
@@ -29,6 +31,15 @@ public class Contact {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public void addPhoneToList(PhoneNumber phoneNumber){
+        if (phoneNumbers == null){
+            phoneNumbers = new ArrayList<>();
+        }
+        phoneNumbers.add(phoneNumber);
+        phoneNumber.setContact(this);
+    }
+
 
     public int getContact_id() {
         return contact_id;
@@ -54,7 +65,13 @@ public class Contact {
         this.lastName = lastName;
     }
 
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
 
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
 
     @Override
     public boolean equals(Object o) {
