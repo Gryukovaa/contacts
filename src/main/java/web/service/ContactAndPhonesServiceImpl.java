@@ -1,12 +1,14 @@
 package web.service;
 
 import org.springframework.transaction.annotation.Transactional;
+import web.dao.PersonDAO;
+
 import web.dao.ContactDAO;
-import web.dao.PhoneNumberDAO;
-import web.entities.Contact;
+import web.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.entities.PhoneNumber;
+import web.entities.Contact;
+
 
 import java.util.List;
 
@@ -14,39 +16,52 @@ import java.util.List;
 @Transactional
 public class ContactAndPhonesServiceImpl implements ContactAndPhonesService {
 
+    private PersonDAO personDAO;
     private ContactDAO contactDAO;
-    private PhoneNumberDAO phoneNumberDAO;
 
     @Autowired
-    public ContactAndPhonesServiceImpl(ContactDAO contactDAO, PhoneNumberDAO phoneNumberDAO) {
+    public ContactAndPhonesServiceImpl(PersonDAO personDAO, ContactDAO contactDAO) {
+        this.personDAO = personDAO;
         this.contactDAO = contactDAO;
-        this.phoneNumberDAO = phoneNumberDAO;
+    }
+
+
+
+    @Override
+    public List<Person> getPersonsList() {
+        return personDAO.getAllPersons();
     }
 
     @Override
-    public void createСontact() {
-
-    }
-
-    @Override
-    public Contact getContactById() {
-        return null;
-    }
-
-    @Override
-    public List<Contact> getContactsList() {
+    public List<Contact> getContactsList(){
         return contactDAO.getAllContacts();
     }
 
     @Override
-    public List<Contact> getContactsWithPhones(){
-        return null;
+    public List<Contact> getListPhonesOfPersonById(int id) {
+        return contactDAO.getListPhonesOfPersonById(id);
     }
 
     @Override
-    public List<PhoneNumber> getNumbersList() {
-        return phoneNumberDAO.getAllNumbers();
+    public void createСontact(Contact contact) {
+        contactDAO.saveNewContact(contact);
     }
+
+    @Override
+    public Contact getContactById(int id) {
+        return contactDAO.getContactById(id);
+    }
+
+    @Override
+    public Person getPersonById(int id) {
+        return personDAO.getPersonById(id);
+    }
+
+    @Override
+    public void updatePerson(Person person) {
+        personDAO.updatePerson(person);
+    }
+
 
     @Override
     public void updateContactById() {
@@ -54,7 +69,7 @@ public class ContactAndPhonesServiceImpl implements ContactAndPhonesService {
     }
 
     @Override
-    public void deleteContactByList() {
-
+    public void deleteContactById(int personId) {
+        personDAO.deletePersonById(personId);
     }
 }

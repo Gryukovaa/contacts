@@ -19,11 +19,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-import web.entities.Contact;
 
 
 import javax.sql.DataSource;
-import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
@@ -86,7 +84,6 @@ public class ApplicationContextAndWebInitializer implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-
         return properties;
     }
 
