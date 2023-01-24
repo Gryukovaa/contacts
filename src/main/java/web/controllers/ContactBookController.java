@@ -46,9 +46,9 @@ public class ContactBookController {
     // Adding new number by person id
     @PostMapping("/contacts")
     public Contact saveNewNumber(@Valid @RequestBody Contact contact){
-        if(contactAndPhonesService.getPersonById(contact.getPerson().getPersonId()) == null)
+        if(contactAndPhonesService.getPersonById(contact.getPerson().getId()) == null)
             throw new NoSuchPersonException(
-                    "Where is no person with id= " + (contact.getPerson().getPersonId()) + " in the DB");
+                    "Where is no person with id= " + (contact.getPerson().getId()) + " in the DB");
         contactAndPhonesService.createСontact(contact);
         return contact;
     }
@@ -57,8 +57,8 @@ public class ContactBookController {
     // Change person
     @PutMapping(value = "/persons")
     public Person updateUser(@Valid @RequestBody Person person) {
-        if(contactAndPhonesService.getPersonById(person.getPersonId()) == null)
-            throw new NoSuchPersonException("Where is no person with id= " + person.getPersonId() + " in the DB");
+        if(contactAndPhonesService.getPersonById(person.getId()) == null)
+            throw new NoSuchPersonException("Where is no person with id= " + person.getId() + " in the DB");
         contactAndPhonesService.updatePerson(person);
         return person;
     }

@@ -35,7 +35,7 @@ public class ContactDAOImpl implements ContactDAO {
     @Override
     public List<Contact> getListPhonesOfPersonById(int PersonId) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Contact> query = session.createQuery("from Contact c left join fetch c.person p where p.personId=:id"
+        Query<Contact> query = session.createQuery("from Contact c left join fetch c.person p where p.id=:id"
                 , Contact.class);
         query.setParameter("id", PersonId);
         return query.getResultList();
@@ -62,7 +62,7 @@ public class ContactDAOImpl implements ContactDAO {
 
         // set old Person's data to the new contact
         contact1.setPerson(
-                session.get(Person.class, contact.getPerson().getPersonId())
+                session.get(Person.class, contact.getPerson().getId())
         );
 
         session.save(contact1);

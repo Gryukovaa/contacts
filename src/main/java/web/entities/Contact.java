@@ -1,13 +1,9 @@
 
 package web.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /*
     Эта сущность - owning side
@@ -26,7 +22,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int contactId;
+    private int id;
 
     @NotNull(message = "this field is required")
     //@Size(min = 11, max = 11, message = "use format 374xxXXXXX, length must be equals 11 symbols")
@@ -60,13 +56,10 @@ public class Contact {
     }
 
 
-    public int getContactId() {
-        return contactId;
+    public int getId() {
+        return id;
     }
 
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
 
     public long getPhoneNumber() {
         return phoneNumber;
@@ -95,7 +88,7 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "contactId=" + contactId +
+                "contactId=" + id +
                 ", phoneNumber=" + phoneNumber +
                 ", person=" + person +
                 '}';
